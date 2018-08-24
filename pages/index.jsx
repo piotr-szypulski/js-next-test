@@ -1,43 +1,43 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Head from 'next/head';
+import React from 'react'
 
-import Header from '../components/header';
-import '../static/style.css';
+import Layout from '../layout';
+import Hero from '../components/hero'
+import LatestPosts from '../components/blog/latest-posts'
 
-const Layout = ({ children, data }) => (
-  <div className="page-wrapper">
-    <Head>
-      {/* <title>{data.site.siteMetadata.title}</title> */}
-      <meta name="description" content="This is a sample Gatsby website for internal RnD Project." />
-      <meta name="keywords" content="gatsby, react, documentation" />
-    </Head>
-    <Header siteTitle="TEST" />
-    <div className="content-wrapper">
-      {'Gatsby RnD'}
-      {/* {children()} */}
-    </div>
-  </div>
-);
+const parsePostObject = (postObject) => ({
+  title: postObject.title.rendered,
+  image: postObject.featured_media_url,
+  author: postObject._embedded.author[0],
+  publishDate: postObject.date,
+  category: postObject._embedded['wp:term'][0][0].name,
+  excerpt: postObject.excerpt.rendered,
+  content: postObject.content.rendered,
+  slug: postObject.slug,
+});
 
-Layout.propTypes = {
-  children: PropTypes.func,
-  data: PropTypes.shape({}),
-};
+class IndexPage extends React.Component {
+  static async getInitialProps() {
+    const url = `https://public-api.wordpress.com/wp/v2/sites/mygatsby.home.blog/posts?_embed`;
+    const res = await fetch(url);
+    const postsArray = await res.json();
+    return {
+      posts: postsArray.map(parsePostObject),
+    }
+  }
 
-Layout.defaultProps = {
-  children: null,
-  data: {},
-};
+  render() {
+    return (
+      <Layout>
+        <Hero title="Gatsby RnD" />
+        <section className="section section-about no-margin">
+          <div className="section-title container align-center">
+            <h2>Hi people<span>Welcome to your new Gatsby site.</span></h2>
+          </div>
+        </section>
+        <LatestPosts data={this.props.posts} />
+      </Layout>
+    )
+  }
+}
 
-export default Layout;
-
-// export const query = graphql`
-//   query SiteTitleQuery {
-//     site {
-//       siteMetadata {
-//         title
-//       }
-//     }
-//   }
-// `
+export default IndexPage

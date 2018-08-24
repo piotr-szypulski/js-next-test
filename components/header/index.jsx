@@ -12,7 +12,9 @@ const Header = ({ siteTitle }) => (
           </Link>
         </li>
         <li className="menu-item-has-children">
-          <Link href="/blog">Blog</Link>
+          <Link href="/blog">
+            <a>Blog</a>
+          </Link>
           <ul className="children">
             <li>
               <Link href="/blog/cf">
@@ -26,7 +28,11 @@ const Header = ({ siteTitle }) => (
             </li>
           </ul>
         </li>
-        <li><Link href="/documentation">Documentation</Link></li>
+        <li>
+          <Link href="/documentation">
+            <a>Documentation</a>
+          </Link>
+        </li>
       </ul>
     </nav>
   </header>
