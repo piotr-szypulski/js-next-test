@@ -1,6 +1,4 @@
-# Next.js WordPress Demo
-
-This is a basic setup with wordpress rest API.
+# Next.js Proof of Concept APP with WordPress API integration
 
 ## Goals
 We were looking for alternative for Gatsby.js as tool for genereting pages with great performance.
