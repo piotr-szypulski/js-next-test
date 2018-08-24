@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch';
 
+import Layout from '../layout';
 import Hero from '../components/hero'
 
 const BlogPost = ({ post }) => {
   return (
-    <div>
+    <Layout>
       <Hero
         title={post.title}
         bg={post.image}
@@ -37,7 +38,7 @@ const BlogPost = ({ post }) => {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   );
 }
 

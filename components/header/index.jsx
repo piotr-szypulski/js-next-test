@@ -6,15 +6,27 @@ const Header = ({ siteTitle }) => (
   <header className="main-header">
     <nav>
       <ul>
-        <li><Link to="/" className="current-menu-item">{siteTitle}</Link></li>
+        <li>
+          <Link href="/" className="current-menu-item">
+            <a>{siteTitle}</a>
+          </Link>
+        </li>
         <li className="menu-item-has-children">
-          <Link to="/blog">Blog</Link>
+          <Link href="/blog">Blog</Link>
           <ul className="children">
-            <li><Link to="/blog/cf">Contentful</Link></li>
-            <li><Link to="/blog/wp">WordPress</Link></li>
+            <li>
+              <Link href="/blog/cf">
+                <a>Contentful</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/wp">
+                <a>WordPress</a>
+              </Link>
+            </li>
           </ul>
         </li>
-        <li><Link to="/documentation">Documentation</Link></li>
+        <li><Link href="/documentation">Documentation</Link></li>
       </ul>
     </nav>
   </header>
